@@ -56,40 +56,6 @@ function apiCallName(name){
 };
 
 
-function submit() {
-
-  $("#search-zip").click(function() {
-    var zipcode = $('#zipcode').val();
-    if (zipcode.length != 5) {
-      alert("Wrong zip code!");
-    } else {
-      $('#zip').html("Zip Code: " + zipcode);
-      apiCallZip(zipcode);
-    }
-  });
-
-  $("#zipcode").keypress(function (e) {
-    if(e.which == 13) {
-      $("#search-zip").click();
-      return false;
-    }
-  });
-
-  $("#searchC").click(function() {
-    console.log(name);
-    var name = $('#city-name').val();
-    clear();
-    apiCallName(name);
-  });
-
-  $("#city-name").keypress(function (e) {
-    if(e.which == 13) {
-      $("#searchC").click();
-      return false;
-    }
-  });
-}
-
 function clear() {
   $('#zip').html("");
   $('#name').html("");
@@ -110,5 +76,39 @@ function clear() {
 
 $(function() {
   // console.log("document ready");
-  submit();
+  // submit();
+
+
+  $("#search-zip").click(function() {
+    var zipcode = $('#zipcode').val();
+    if (zipcode.length == 5 || zipcode.length == 6) {
+      $('#zip').html("Zip Code: " + zipcode);
+      apiCallZip(zipcode);
+    } else {
+      alert("Wrong zip code!");
+    }
+  });
+
+  $("#zipcode").keypress(function (e) {
+    if(e.which == 13) {
+      $("#search-zip").click();
+      return false;
+    }
+  });
+
+    $("#searchC").click(function() {
+      var name = $('#city-name').val();
+      console.log(name);
+      clear();
+      apiCallName(name);
+    });
+
+
+    $("#city-name").keypress(function (e) {
+      if(e.which == 13) {
+        $("#searchC").click();
+        return false;
+      }
+    });
+
 });
